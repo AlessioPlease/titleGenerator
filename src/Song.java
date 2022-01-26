@@ -1,5 +1,3 @@
-package randomTitle;
-
 import java.util.*;
 
 public class Song {
