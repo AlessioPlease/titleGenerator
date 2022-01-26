@@ -1,4 +1,4 @@
-# titleGenerator
+# Title Generator
 This program will generate a random title from a song's lyrics.
 The input needs to be linearized.
 You can use one of the following online tools to easily linearize e song's lyrics:
