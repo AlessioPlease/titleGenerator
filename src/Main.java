@@ -10,8 +10,10 @@ public class Main {
         input.close();
 
         Song song = new Song();
-        song.generateRandomTitle(songLyrics);
+        System.out.println("RANDOM TITLE:");
+        System.out.println(song.generateRandomTitle(songLyrics));
+        System.out.println("\nSCRAMBLED WORDS:");
+        System.out.println(song.scramble(songLyrics));
 
-        System.out.println(song.getRandomTitle());
     }
 }

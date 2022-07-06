@@ -3,11 +3,10 @@ import java.util.*;
 public class Song {
 
     private final String delim = " ";
-    private String title  = "";
 
 
 
-    public void generateRandomTitle(String lyrics) {
+    public String generateRandomTitle(String lyrics) {
         Random randomNumber = new Random();
         ArrayList<String> newTitle = new ArrayList<>();
         Integer randomIndex;
@@ -20,38 +19,46 @@ public class Song {
         for (int i = randomIndex; i < randomIndex + randomLength; i++) {
             newTitle.add(words.get(i));
         }
-        setTitle(String.join(" ", newTitle));
+        return String.join(" ", newTitle);
+    }
+
+    public String scramble(String lyrics) {
+        Random numberGenerator = new Random();
+        HashSet<Integer> takenIndexes = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+        ArrayList<String> words = tokenize(lyrics);
+        boolean finished = false;
+
+        while (! finished) {
+            int randomNumber = numberGenerator.nextInt(words.size());
+
+            if (! takenIndexes.contains(randomNumber)) {
+                takenIndexes.add(randomNumber);
+                sb.append(words.get(randomNumber)).append(" ");
+            }
+            if (takenIndexes.size() == words.size()) {
+                finished = true;
+            }
+        }
+        return String.valueOf(sb);
     }
 
     private ArrayList<String> tokenize(String lyrics) {
         ArrayList<String> words = new ArrayList<>();
         lyrics = cleanLyric(lyrics);
-
-        System.out.println("Tokenizing...\n\n");
         StringTokenizer st = new StringTokenizer(lyrics, this.delim);
 
         while (st.hasMoreTokens()) {
             words.add(st.nextToken());
         }
-        System.out.println("There are " + words.size() + " words in this song");
         return words;
     }
 
     private String cleanLyric(String lyrics) {
-
         String cleanSong = lyrics.replace("(", " ");
         cleanSong = cleanSong.replace(")", " ");
         cleanSong = cleanSong.replace(",", " ");
         cleanSong = cleanSong.replace(".", " ");
-
         return cleanSong;
-    }
-
-    public String getRandomTitle() {
-        return title;
-    }
-
-    private void setTitle(String title) {
-        this.title = title;
     }
 }
