@@ -5,13 +5,12 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        String songLyric;
         System.out.println("Input the song's lyrics (all in one line): ");
-        songLyric = input.nextLine();
+        String songLyrics = input.nextLine();
         input.close();
 
-        Song song = new Song(songLyric);
-        song.generateRandomTitle();
+        Song song = new Song();
+        song.generateRandomTitle(songLyrics);
 
         System.out.println(song.getRandomTitle());
     }
